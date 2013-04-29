@@ -11,30 +11,30 @@ public class DateTimeFormatFinderTest {
 
     @Test
     public void assertExpectedFormat() {
-        String actualDateFormat = DateTimeFormatFinder.getInstance().getDateTimeFormat(DATE_TIME_STRING);
+        String actualDateFormat = new DateTimeFormatFinder(DATE_TIME_STRING).getDateTimeFormat();
 
         Assert.assertEquals(EXPECTED_DATE_FORMAT, actualDateFormat);
     }
 
     @Test(expected = DateTimeFormatFinder.DateTimeFormatFinderParseException.class)
     public void assertExceptionWhenUnexpectedDateTimeFormat() {
-        DateTimeFormatFinder.getInstance().getDateTimeFormat(UNEXPECTED_DATE_TIME_STRING);
+        new DateTimeFormatFinder(UNEXPECTED_DATE_TIME_STRING).getDateTimeFormat();
     }
 
     @Test(expected = DateTimeFormatFinder.DateTimeFormatFinderIllegalArgumentException.class)
     public void assertExceptionWhenNullDateTimeFormatProvided() {
-        DateTimeFormatFinder.getInstance().getDateTimeFormat(NULL_DATE_TIME_STRING);
+        new DateTimeFormatFinder(NULL_DATE_TIME_STRING).getDateTimeFormat();
     }
 
     @Test(expected = DateTimeFormatFinder.DateTimeFormatFinderIllegalArgumentException.class)
     public void assertExceptionWhenEmptyDateTimeFormatProvided() {
-        DateTimeFormatFinder.getInstance().getDateTimeFormat(EMPTY_DATE_TIME_STRING);
+        new DateTimeFormatFinder(EMPTY_DATE_TIME_STRING).getDateTimeFormat();
     }
 
     @Test
     public void assertExceptionMessageForEmptyDateTime() {
         try {
-            DateTimeFormatFinder.getInstance().getDateTimeFormat(EMPTY_DATE_TIME_STRING);
+            new DateTimeFormatFinder(EMPTY_DATE_TIME_STRING).getDateTimeFormat();
         } catch(DateTimeFormatFinder.DateTimeFormatFinderIllegalArgumentException e) {
             Assert.assertEquals(DateTimeFormatFinder.DateTimeFormatFinderIllegalArgumentException.EMPTY_DATE_TIME_EXCEPTION, e.getMessage());
             return;
@@ -45,7 +45,7 @@ public class DateTimeFormatFinderTest {
     @Test
     public void assertExceptionMessageForNullDateTime() {
         try {
-            DateTimeFormatFinder.getInstance().getDateTimeFormat(NULL_DATE_TIME_STRING);
+            new DateTimeFormatFinder(NULL_DATE_TIME_STRING).getDateTimeFormat();
         } catch(DateTimeFormatFinder.DateTimeFormatFinderIllegalArgumentException e) {
             Assert.assertEquals(DateTimeFormatFinder.DateTimeFormatFinderIllegalArgumentException.NULL_DATE_TIME_EXCEPTION, e.getMessage());
             return;

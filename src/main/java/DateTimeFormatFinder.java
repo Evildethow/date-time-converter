@@ -52,15 +52,15 @@ public class DateTimeFormatFinder {
 
             String pattern = dateTimeFormatProperty.pattern;
 
-            if (dateTimeFormatProperty.pattern.endsWith("ZZ")) {
-                pattern = pattern.substring(0, pattern.length() - 1);
+            if (dateTimeFormatProperty.endsWithZZOutput()) {
+                pattern = dateTimeFormatProperty.removeZZOutputTail();
             }
 
             parser.applyPattern(pattern);
             pos.setIndex(0);
 
             String dateTimeCopy = dateTime;
-            if (dateTimeFormatProperty.pattern.endsWith("ZZ")) {
+            if (dateTimeFormatProperty.endsWithZZOutput()) {
                 dateTimeCopy = dateTime.replaceAll("([-+][0-9][0-9]):([0-9][0-9])$", "$1$2");
             }
 
@@ -98,10 +98,21 @@ public class DateTimeFormatFinder {
     }
 
     private static class DateTimeFormatProperty {
+
+        private static final String ZZ_OUTPUT = "ZZ";
+
         private final String pattern;
 
         private DateTimeFormatProperty(String pattern) {
             this.pattern = pattern;
+        }
+
+        private boolean endsWithZZOutput() {
+            return pattern.endsWith(ZZ_OUTPUT);
+        }
+
+        private String removeZZOutputTail() {
+            return pattern.substring(0, pattern.length() - 1);
         }
     }
 

@@ -1,3 +1,1 @@
-Provides a Date / Time finder that allows the DateFormat pattern to be determined by matching a given String dateTime
-against a List of available patterns and returning the pattern matching. If no pattern is found then a RuntimeException
-is thrown.
+Provides a Date / Time finder that allows the DateFormat pattern to be determined by matching a given String dateTime against a List of available patterns and returning the pattern matching. If no pattern is found then a RuntimeException is thrown.
